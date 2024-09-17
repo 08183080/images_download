@@ -5,7 +5,7 @@ from tkinter import filedialog
 from tkinter import messagebox
 from PIL import Image, ImageTk
 
-qr_code_path = 'D:\images_download\支付宝.png'
+# qr_code_path = '.\支付宝.png'
 
 
 class App(tk.Tk):
@@ -34,18 +34,18 @@ class App(tk.Tk):
         self.button_confirm.pack()
 
         # 添加一个标签来显示软件作者公众号信息
-        self.label_author = tk.Label(self, text="软件作者公众号：与龙邂逅 \n 传递正能量，欢迎支付宝赞助杯咖啡", fg="blue", cursor="hand2")
+        self.label_author = tk.Label(self, text="软件作者公众号：与龙邂逅", fg="blue", cursor="hand2")
         self.label_author.pack(side="bottom", pady=10)  # 使用side和pady来调整标签的位置
 
-        # 加载支付宝收款码图片
-        qr_code_image = Image.open(qr_code_path)
-        qr_code_image = qr_code_image.resize((80, 80))  # 调整图片大小
-        qr_code_image = ImageTk.PhotoImage(qr_code_image)
+        # # 加载支付宝收款码图片
+        # qr_code_image = Image.open(qr_code_path)
+        # qr_code_image = qr_code_image.resize((80, 80))  # 调整图片大小
+        # qr_code_image = ImageTk.PhotoImage(qr_code_image)
 
-        # 在窗口的右下角创建一个标签，并设置图片
-        qr_code_label = tk.Label(self, image=qr_code_image)
-        qr_code_label.image = qr_code_image  # 保持引用
-        qr_code_label.pack(side='bottom', anchor='se')
+        # # 在窗口的右下角创建一个标签，并设置图片
+        # qr_code_label = tk.Label(self, image=qr_code_image)
+        # qr_code_label.image = qr_code_image  # 保持引用
+        # qr_code_label.pack(side='bottom', anchor='se')
 
 
     def select_folder(self):
