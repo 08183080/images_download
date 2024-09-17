@@ -1,0 +1,1 @@
+pyinstaller --onefile --noconfirm --windowed --icon "C:\Users\龙龙\Desktop\ic.jpeg" .\app.py
