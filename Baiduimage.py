@@ -10,6 +10,8 @@ from urllib.parse import unquote, quote
 from concurrent import futures
 
 
+proxies={'http':{}, 'https': {}}
+
 g_headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -38,7 +40,7 @@ def baidu_get_image_url_using_api(keywords, max_number=10000, face_only=False):
 
     init_url = query_url + "&pn=0&rn=30"
 
-    res = requests.get(init_url, headers=g_headers)
+    res = requests.get(init_url, headers=g_headers, proxies=proxies)
     init_json = json.loads(res.text.replace(r"\'", "").encode("utf-8"), strict=False)
 
     total_num = init_json['listNum']
@@ -58,7 +60,7 @@ def baidu_get_image_url_using_api(keywords, max_number=10000, face_only=False):
             try_time = 0
             while True:
                 try:
-                    response = requests.get(url, headers=g_headers)
+                    response = requests.get(url, headers=g_headers, proxies=proxies)
                     break
                 except Exception as e:
                     try_time += 1
@@ -98,7 +100,7 @@ def download_image(image_url, dst_dir, file_name, timeout=20):
     while True:
         try:
             try_times += 1
-            response = requests.get(image_url, headers=g_headers, timeout=timeout)
+            response = requests.get(image_url, headers=g_headers, timeout=timeout, proxies=proxies)
             with open(file_path, 'wb') as f:
                 f.write(response.content)
             response.close()
