@@ -1,4 +1,4 @@
-from Baiduimage import baidu_get_image_url_using_api, download_images
+from baiduimage import baidu_get_image_url_using_api, download_images
 
 import tkinter as tk, os
 from tkinter import filedialog
