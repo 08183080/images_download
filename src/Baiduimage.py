@@ -124,7 +124,7 @@ def download_image(image_url, dst_dir, file_name, timeout=20):
             break
 
 
-def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, timeout=20):
+def download_images(image_urls, dst_dir, concurrency=50, timeout=20):
     socket.setdefaulttimeout(timeout)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
