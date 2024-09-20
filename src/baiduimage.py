@@ -44,7 +44,10 @@ def baidu_get_image_url_using_api(keywords, max_number=10000, face_only=False):
     res = requests.get(init_url, headers=g_headers, proxies=proxies)
     init_json = json.loads(res.text.replace(r"\'", "").encode("utf-8"), strict=False)
 
+    # print(init_json)
     total_num = init_json['listNum']
+    # print(total_num)
+
     target_num = min(max_number, total_num)
     crawl_num = min(target_num * 2, total_num)
 
