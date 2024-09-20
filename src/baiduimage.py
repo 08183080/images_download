@@ -11,6 +11,7 @@ from concurrent import futures
 
 
 proxies={'http':{}, 'https': {}}
+# proxies={'http':'127.0.0.1:7890', 'https': '//127.0.0.1:7890'}
 
 g_headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
