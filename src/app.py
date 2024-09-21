@@ -3,7 +3,10 @@ from baiduimage import baidu_get_image_url_using_api, download_images
 import tkinter as tk, os
 from tkinter import filedialog
 from tkinter import messagebox
+<<<<<<< HEAD
 # from PIL import Image, ImageTk
+=======
+>>>>>>> b821051a541fb8e9169fe882b31586bfd3b61c06
 
 # qr_code_path = '.\支付宝.png'
 

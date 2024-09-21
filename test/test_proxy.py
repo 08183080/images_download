@@ -1,6 +1,7 @@
 import requests
 
 proxies = {'http':{}, 'https': {}}
+# proxies={'http':'127.0.0.1:7890', 'https': '//127.0.0.1:7890'}
 
 print(requests.get('http://icanhazip.com', timeout=5).text.strip())  # proxy ip
 

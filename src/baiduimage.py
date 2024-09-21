@@ -11,6 +11,10 @@ from concurrent import futures
 
 
 proxies={'http':{}, 'https': {}}
+<<<<<<< HEAD
+=======
+# proxies={'http':'127.0.0.1:7890', 'https': '//127.0.0.1:7890'}
+>>>>>>> b821051a541fb8e9169fe882b31586bfd3b61c06
 
 g_headers = {
     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
@@ -43,7 +47,14 @@ def baidu_get_image_url_using_api(keywords, max_number=10000, face_only=False):
     res = requests.get(init_url, headers=g_headers, proxies=proxies)
     init_json = json.loads(res.text.replace(r"\'", "").encode("utf-8"), strict=False)
 
+<<<<<<< HEAD
     total_num = init_json['listNum']
+=======
+    # print(init_json)
+    total_num = init_json['listNum']
+    # print(total_num)
+
+>>>>>>> b821051a541fb8e9169fe882b31586bfd3b61c06
     target_num = min(max_number, total_num)
     crawl_num = min(target_num * 2, total_num)
 
@@ -124,7 +135,11 @@ def download_image(image_url, dst_dir, file_name, timeout=20):
             break
 
 
+<<<<<<< HEAD
 def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, timeout=20):
+=======
+def download_images(image_urls, dst_dir, concurrency=50, timeout=20):
+>>>>>>> b821051a541fb8e9169fe882b31586bfd3b61c06
     socket.setdefaulttimeout(timeout)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
@@ -137,4 +152,8 @@ def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, time
             future_list.append(executor.submit(
                 download_image, image_url, dst_dir, file_name, timeout))
             count += 1
+<<<<<<< HEAD
         concurrent.futures.wait(future_list, timeout=180)
+=======
+        concurrent.futures.wait(future_list, timeout=180)
+>>>>>>> b821051a541fb8e9169fe882b31586bfd3b61c06
