@@ -54,7 +54,7 @@ class App(tk.Tk):
         
         try:
             urls = baidu_get_image_url_using_api(keywords, max_number=max_number)
-            download_images(urls, save_folder, "image", timeout=20)
+            download_images(urls, save_folder, keywords, timeout=20)
             messagebox.showinfo("完成", "图片已成功下载！")
             self.open_folder(save_folder)
         except Exception as e:

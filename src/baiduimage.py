@@ -124,7 +124,7 @@ def download_image(image_url, dst_dir, file_name, timeout=20):
             break
 
 
-def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, timeout=20):
+def download_images(image_urls, dst_dir, file_prefix, concurrency=50, timeout=20):
     socket.setdefaulttimeout(timeout)
 
     with concurrent.futures.ThreadPoolExecutor(max_workers=concurrency) as executor:
@@ -133,7 +133,7 @@ def download_images(image_urls, dst_dir, file_prefix="img", concurrency=50, time
         if not os.path.exists(dst_dir):
             os.makedirs(dst_dir)
         for image_url in image_urls:
-            file_name = "%04d" % count
+            file_name = file_prefix + '_' +'%d' % count
             future_list.append(executor.submit(
                 download_image, image_url, dst_dir, file_name, timeout))
             count += 1
