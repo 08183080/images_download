@@ -1,1 +1,1 @@
-pyinstaller --onefile --noconfirm --windowed --icon "D:\images_download\logo.jpg" --name '图片下载器' .\app.py
+pyinstaller --onefile --noconfirm --windowed --icon .\img\logo.jpg --name '图片下载器' .\src\app.py

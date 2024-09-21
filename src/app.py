@@ -1,19 +1,17 @@
-import os, shutil
+import os
 import tkinter as tk
 from tkinter import filedialog
 from tkinter import messagebox
-from baiduimage import baidu_get_image_url_using_api, download_images
+import subprocess
 
-# def remove_cache():
-#     cache_dir = 'src/__pycache__'  
-#     shutil.rmtree(cache_dir)
-#     # print(f"Cache directory '{cache_dir}' has been removed.")
+from baiduimage import baidu_get_image_url_using_api, download_images
+from glm_image import generate_and_save_images
 
 class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title('图片下载器')
-        self.geometry("400x300")
+        self.geometry("400x350")
         
         self.label_keywords = tk.Label(self, text="主题:")
         self.entry_keywords = tk.Entry(self)
@@ -32,6 +30,19 @@ class App(tk.Tk):
         self.entry_max_number.pack()
         self.button_select_folder.pack()
         self.label_selected_folder.pack()
+        
+        # 添加单选框
+        self.var_method = tk.StringVar(value="none")  # 默认值为"none"
+        
+        # 使用Frame来组织单选框
+        self.frame_radiobuttons = tk.Frame(self)
+        self.radiobutton_crawler = tk.Radiobutton(self.frame_radiobuttons, text="使用爬虫", variable=self.var_method, value="crawler")
+        self.radiobutton_ai = tk.Radiobutton(self.frame_radiobuttons, text="使用AI", variable=self.var_method, value="ai")
+        
+        self.radiobutton_crawler.pack(side="left", padx=10)
+        self.radiobutton_ai.pack(side="left", padx=10)
+        self.frame_radiobuttons.pack()
+        
         self.button_confirm.pack()
 
         # 添加一个标签来显示软件作者公众号信息
@@ -53,8 +64,16 @@ class App(tk.Tk):
             return
         
         try:
-            urls = baidu_get_image_url_using_api(keywords, max_number=max_number)
-            download_images(urls, save_folder, keywords, timeout=20)
+            method = self.var_method.get()
+            if method == "crawler":
+                urls = baidu_get_image_url_using_api(keywords, max_number=max_number)
+                download_images(urls, save_folder, keywords, timeout=20)
+            elif method == "ai":
+                generate_and_save_images(keywords, max_number, save_folder)
+            else:
+                messagebox.showerror("错误", "请选择一种下载方式！")
+                return
+
             messagebox.showinfo("完成", "图片已成功下载！")
             self.open_folder(save_folder)
         except Exception as e:
