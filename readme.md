@@ -40,6 +40,12 @@
 5. 要体验 AI 生成，请先登录注册智谱的 bigmodel 平台，创建领取免费 api 额度。
 6. 如果体验 AI 生图，注册拿到智谱的 api 之后，在电脑设置环境变量
 ![alt text](img/windows_zhipu.png)
+
+
 7. 软件使用界面如下：
-![alt text](img/use_demo.png)
-9. 图片下载完成之后，会自动打开到图片文件夹的
+
+
+    ![alt text](img/use_demo.png)
+
+
+8. 图片下载完成之后，自动打开下载目录
