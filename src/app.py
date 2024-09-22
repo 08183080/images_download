@@ -5,7 +5,7 @@ from tkinter import messagebox
 import subprocess
 
 from baiduimage import baidu_get_image_url_using_api, download_images
-from glm_image import generate_and_save_images
+from glm_image import generate_and_save_images_multithreaded
 
 class App(tk.Tk):
     def __init__(self):
@@ -69,7 +69,7 @@ class App(tk.Tk):
                 urls = baidu_get_image_url_using_api(keywords, max_number=max_number)
                 download_images(urls, save_folder, keywords, timeout=20)
             elif method == "ai":
-                generate_and_save_images(keywords, max_number, save_folder)
+                generate_and_save_images_multithreaded(keywords, max_number, save_folder)
             else:
                 messagebox.showerror("错误", "请选择一种下载方式！")
                 return

@@ -1,5 +1,6 @@
 import os, requests
 from zhipuai import ZhipuAI
+from concurrent.futures import ThreadPoolExecutor
 
 '''
 智谱 AI 图片生成
@@ -35,8 +36,28 @@ def save_image(url, filename):
     else:
         print(f"Failed to download image from {url}")
 
-def generate_and_save_images(actor, num_images, path):
-    for i in range(1, num_images + 1):
+# def generate_and_save_images(actor, num_images, path):
+#     for i in range(1, num_images + 1):
+#         image_url = get_image_url(actor)
+#         filename = os.path.join(path, f"{actor}_glm_{i}.png")
+#         save_image(image_url, filename)
+
+def generate_and_save_images(actor, start_index, end_index, path):
+    for i in range(start_index, end_index):
         image_url = get_image_url(actor)
         filename = os.path.join(path, f"{actor}_glm_{i}.png")
         save_image(image_url, filename)
+
+def generate_and_save_images_multithreaded(actor, num_images, path, max_workers=5):
+    images_per_thread = num_images // max_workers
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = []
+        start_index = 1
+        for i in range(max_workers):
+            end_index = start_index + images_per_thread
+            if i == max_workers - 1:  # 确保最后一个线程获取所有剩余的图片
+                end_index = num_images + 1
+            futures.append(executor.submit(generate_and_save_images, actor, start_index, end_index, path))
+            start_index = end_index
+        for future in futures:
+            future.result()  # 等待所有线程完成
